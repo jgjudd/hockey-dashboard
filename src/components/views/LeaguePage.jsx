@@ -11,8 +11,8 @@ const LeaguePage = () => {
 
  
       <div>
-        <h3 className="text-center">{data?.metropolitan?.division?.name}</h3>
-        <ol>
+        <h3 className="text-center text-slate-800 underline">{data?.metropolitan?.division?.name}</h3>
+        <ol className="list-decimal mt-2">
           {
             data?.metropolitan?.teamRecords?.map(team => {
               return (
@@ -28,8 +28,8 @@ const LeaguePage = () => {
         </ol>
       </div>
       <div>
-        <h3 className="text-center">{data?.atlantic?.division?.name}</h3>
-        <ol>
+        <h3 className="text-center text-slate-800 underline">{data?.atlantic?.division?.name}</h3>
+        <ol className="list-decimal mt-2">
           {
             data?.atlantic?.teamRecords?.map(team => {
               return (
@@ -40,8 +40,8 @@ const LeaguePage = () => {
         </ol>
       </div>
       <div>
-        <h3 className="text-center">{data?.central?.division?.name}</h3>
-        <ol>
+        <h3 className="text-center text-slate-800 underline">{data?.central?.division?.name}</h3>
+        <ol className="list-decimal mt-2">
           {
             data?.central?.teamRecords?.map(team => {
               return (
@@ -52,8 +52,8 @@ const LeaguePage = () => {
         </ol>
       </div>
       <div>
-        <h3 className="text-center">{data?.pacific?.division?.name}</h3>
-        <ol>
+        <h3 className="text-center text-slate-800 underline">{data?.pacific?.division?.name}</h3>
+        <ol className="list-decimal mt-2">
           {
             data?.pacific?.teamRecords?.map(team => {
               return (
@@ -64,8 +64,6 @@ const LeaguePage = () => {
         </ol>
       </div>
        
-
-
     </div>
   )
 }
