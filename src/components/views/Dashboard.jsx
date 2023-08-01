@@ -23,7 +23,7 @@ const Dashboard = () => {
   // }, [])
 
   const { isLoading, isError, data } = useQuery('teams', getAllTeams)
-  console.log(data)
+  // console.log(data)
   return (
     <>
     { isError && <div>Something went wrong with the teams query</div>}

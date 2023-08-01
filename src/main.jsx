@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Dashboard from './components/views/Dashboard.jsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import TeamPage from './components/views/TeamPage'
+import LeaguePage from './components/views/LeaguePage.jsx'
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/league',
-        element: <div>League Page</div>
+        element: <LeaguePage />
       },
       {
         path: '/allTeams',

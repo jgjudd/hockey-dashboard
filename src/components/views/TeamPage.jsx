@@ -1,7 +1,11 @@
 
 const TeamPage = () => {
   return (
-    <div>Individual Team Page</div>
+    <>
+      <div>
+        
+      </div>
+    </>
   )
 }
 
