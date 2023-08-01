@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Dashboard from './components/views/Dashboard.jsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import TeamPage from './components/views/TeamPage'
 
 const queryClient = new QueryClient()
 
@@ -19,8 +20,12 @@ const router = createBrowserRouter([
         element: <div>League Page</div>
       },
       {
-        path: '/teams',
-        element: <Dashboard />
+        path: '/allTeams',
+        element: <Dashboard />,
+      },
+      {
+        path: '/teams/:teamId',
+        element: <TeamPage />
       },
       {
         path: '/players',

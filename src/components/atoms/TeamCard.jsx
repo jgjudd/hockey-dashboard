@@ -1,13 +1,15 @@
 
 import Logo from '../../components/atoms/Logo'
 import './TeamCard.css'
+import { Link } from 'react-router-dom'
 
 const TeamCard = ({ teamInfo }) => {
-  console.log(teamInfo.name)
+  // console.log(teamInfo.id)
   return (
-
-      <button 
-        class="p-1 bg-grey-500 flex justify-between items-center border-2 shadow shadow-slate-50 active:bg-slate-50 hover:border-grey-500"
+    <Link to={`/teams/${teamInfo.id}`} class="p-1 bg-grey-500 border-2 shadow shadow-slate-50 active:bg-slate-50 hover:border-grey-500">
+      <button
+        type='button'
+        className="w-full flex justify-between items-center"
       >
         <div className="text-left">  
           <p className="mb-2 ml-1 text-lg">{ teamInfo?.name } ({ teamInfo?.abbreviation })</p>
@@ -21,7 +23,7 @@ const TeamCard = ({ teamInfo }) => {
           <Logo teamAbbreviation={teamInfo?.abbreviation} />
         </div>
       </button>
-
+    </Link>
   )
 }
 
