@@ -20,6 +20,21 @@ const TeamPage = () => {
       { isLoading && <div>Loading...</div> }
       { isError && <div>Error Loading Team Data</div> }
 
+    <div className='flex justify-end'>
+      <div className='mx-4 mb-4 '>
+          <div className='text-left ml-2'>
+            Select Team:
+          </div>
+          <select className='border-2 border-slate-300 pr-8 pl-2 py-1'>
+            <option value={teamId}>{data?.teamInfo.name}</option>
+            <option>2</option>
+            <option>2</option>
+            <option>2</option>
+            <option>2</option>
+          </select>
+        </div>
+    </div>
+
       <div className="text-center">
         <h3>{data?.teamInfo.name}</h3>
         <p>Est. {data?.teamInfo.firstYearOfPlay}</p>
@@ -31,16 +46,18 @@ const TeamPage = () => {
 
         <a href={data?.teamInfo.officialSiteUrl} target="_blank">{data?.teamInfo.officialSiteUrl}</a>
       </div>
-
-      <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-        <p> wins: {data?.teamStats.wins} ({data?.teamStatRankings.wins})</p>
-        <p> losses: {data?.teamStats.losses} ({data?.teamStatRankings.losses})</p>
-        <p> ot: {data?.teamStats.ot} ({data?.teamStatRankings.ot})</p>
-      </div>
-
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center mt-10">
         <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> pts: {data?.teamStats.pts} ({data?.teamStatRankings.pts})</p>
+          <p className='text-center mb-2'>
+            {data?.teamStats.wins}-{data?.teamStats.losses}-{data?.teamStats.ot}
+          </p>
+          <p> Wins: {data?.teamStats.wins} ({data?.teamStatRankings.wins})</p>
+          <p> Losses: {data?.teamStats.losses} ({data?.teamStatRankings.losses})</p>
+          <p> OT: {data?.teamStats.ot} ({data?.teamStatRankings.ot})</p>
+          <p> Pts: {data?.teamStats.pts} ({data?.teamStatRankings.pts})</p>
+        </div>
+
+        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
           <p> winScoreFirst: {data?.teamStats.winScoreFirst} ({data?.teamStatRankings.winScoreFirst})</p>
           <p> winOppScoreFirst: {data?.teamStats.winOppScoreFirst} ({data?.teamStatRankings.winOppScoreFirst})</p>
           <p> winLeadFirstPer: {data?.teamStats.winLeadFirstPer} ({data?.teamStatRankings.winLeadFirstPer})</p>
