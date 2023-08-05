@@ -14,7 +14,10 @@ const TeamPage = () => {
   
   const { isLoading, isError, data } = useQuery(['teams', teamId, 'stats'], () => getTeamDataById(teamId))
   console.log('data.roster:')
-  console.log(data?.roster)
+  console.log(data?.forwards)
+  console.log(data?.defensemen)
+  console.log(data?.goalies)
+
   return (
     <>
       { isLoading && <div>Loading...</div> }
@@ -35,7 +38,7 @@ const TeamPage = () => {
           </div>
       </div>
 
-      <div className="text-center mb-10">
+      <div className="text-center">
         <h1 className='text-2xl'>{data?.teamInfo.name}</h1>
         <p className='mb-4'>Est. {data?.teamInfo.firstYearOfPlay}</p>
 
@@ -46,12 +49,82 @@ const TeamPage = () => {
 
         <a href={data?.teamInfo.officialSiteUrl} target="_blank">{data?.teamInfo.officialSiteUrl}</a>
       </div>
-      <p className='text-left text-xl mb-4 ml-4'>
+
+      <p className='text-right text-xl mr-6'>
         Overall: {data?.teamStats.wins}W - {data?.teamStats.losses}L - {data?.teamStats.ot}OTL
       </p>
-      <div className="grid gap-4 grid-cols-3 justify-stretch mx-4">
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
 
+
+
+
+      <div>
+          <h3 className='ml-6'>Forwards</h3>
+          <div className='flex flex-wrap justify-around'>
+            {
+              data?.forwards.map(player => {
+                return (
+                  <span key={player.person.id} className='m-2 border-2 border-slate-200'>
+                    <p>{player.person.fullName}</p>
+                    <p>{player.jerseyNumber}</p>
+                    <p>{player.person.id}</p>
+                    <p>{player.person.link}</p>
+
+                    <p>{player.position.name}</p>
+                    <p>{player.position.abbreviation}</p>
+                    <p>{player.position.type}</p>
+
+                  </span>
+                )
+              })
+            }
+          </div>
+      </div>
+
+      <div>
+          <h3 className='ml-6'>Defensemen</h3>
+          <div className='flex flex-wrap justify-between'>
+            {
+              data?.defensemen.map(player => {
+                return (
+                  <span key={player.person.id} className='m-2 border-2 border-slate-200'>
+                    <p>{player.person.fullName}</p>
+                    <p>{player.person.id}</p>
+                    <p>{player.person.link}</p>
+
+                    <p>{player.position.name}</p>
+                    <p>{player.position.abbreviation}</p>
+                    <p>{player.position.type}</p>
+
+                  </span>
+                )
+              })
+            }
+          </div>
+      </div>
+
+      <div>
+          <h3 className='ml-6'>Goalies</h3>
+          <div className='flex flex-wrap justify-between'>   
+            {
+              data?.goalies.map(player => {
+                return (
+                  <span key={player.person.id} className='m-2 border-2 border-slate-200'>
+                    <p>{player.person.fullName}</p>
+                    <p>{player.person.id}</p>
+                    <p>{player.person.link}</p>
+
+                    <p>{player.position.name}</p>
+                    <p>{player.position.abbreviation}</p>
+                    <p>{player.position.type}</p>
+
+                  </span>
+                )
+              })
+            }
+          </div>
+      </div>
+
+      <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
           <p className="text-right text-sm">NHL Rank</p>
           
           <div className='flex justify-between'>
@@ -77,6 +150,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.ot}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Pts: </span>
@@ -84,10 +158,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.pts}</p>
           </div>
-        </div>
 
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[35%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
           <div className='flex justify-between'>
             <p className="mb-4 text-slate-600"> 
               <span className='text-l font-bold'>Wins When Scoring First: </span>
@@ -113,11 +184,11 @@ const TeamPage = () => {
           </div>
 
           <div className='flex justify-between'>
-            <p className="mb-4 text-slate-600"> 
-              <span className='text-l font-bold'>Wins When Leading In Second Period: </span>
-              {data?.teamStats.winLeadSecondPer}
-            </p>
-            <p className='ml-8'>{data?.teamStatRankings.winLeadSecondPer}</p>
+          <p className="mb-4 text-slate-600"> 
+            <span className='text-l font-bold'>Wins When Leading In Second Period: </span>
+            {data?.teamStats.winLeadSecondPer}
+          </p>
+          <p className='ml-8'>{data?.teamStatRankings.winLeadSecondPer}</p>
           </div>
 
           <div className='flex justify-between'>
@@ -135,10 +206,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.winOutshotByOpp}</p>
           </div>
-        </div>
 
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Shots Per Game: </span>
@@ -146,6 +214,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.shotsPerGame}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Shots Allowed Per Game: </span>
@@ -153,6 +222,7 @@ const TeamPage = () => {
             </p>
             <p className='ml-14'>{data?.teamStatRankings.shotsAllowed}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Shooting Pctg: </span>
@@ -160,10 +230,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.shootingPctRank}</p>
           </div>
-        </div>
 
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>evGGA Ratio: </span>
@@ -171,6 +238,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.evGGARatio}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Faceoff Win Percentage: </span>
@@ -178,6 +246,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.faceOffWinPercentage}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Faceoffs Lost: </span>
@@ -185,6 +254,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.faceOffsLost}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Faceoffs Taken: </span>
@@ -192,6 +262,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.faceOffsTaken}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Faceoffs Won: </span>
@@ -199,10 +270,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.faceOffsWon}</p>
           </div>
-        </div>
 
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Goals Per Game: </span>
@@ -210,6 +278,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.goalsPerGame}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Goals Against Per Game: </span>
@@ -217,10 +286,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.goalsAgainstPerGame}</p>
           </div>
-        </div>
 
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600">
               <span className='text-l font-bold'>Power Play Percentage: </span>
@@ -228,13 +294,15 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.powerPlayPercentage}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600">
-               <span className='text-l font-bold'>Power Play Goals: </span>
-               {data?.teamStats.powerPlayGoals}
+                <span className='text-l font-bold'>Power Play Goals: </span>
+                {data?.teamStats.powerPlayGoals}
             </p>
             <p>{data?.teamStatRankings.powerPlayGoals}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Power Play Opportunities: </span>
@@ -242,17 +310,15 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.powerPlayOpportunities}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
             <span className='text-l font-bold'>Power Play Goals Against: </span>
             {data?.teamStats.powerPlayGoalsAgainst}
             </p>
             <p>{data?.teamStatRankings.powerPlayGoalsAgainst}</p>
-          </div>         
-        </div>
-        
-        <div className="p-4 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
+          </div>  
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600">
               <span className='text-l font-bold'>Penalty Kill Percentage: </span>
@@ -260,10 +326,7 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.penaltyKillPercentage}</p>
           </div>
-        </div>
 
-        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
-          <p className="text-right text-sm">NHL Rank</p>
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Point Pctg: </span> 
@@ -271,16 +334,16 @@ const TeamPage = () => {
             </p>
             <p>{data?.teamStatRankings.ptPctg}</p>
           </div>
+
           <div className='flex justify-between'>
             <p className="mb-2 text-slate-600"> 
               <span className='text-l font-bold'>Save Pctg: </span>
               {data?.teamStats.savePctg}
             </p>
             <p>{data?.teamStatRankings.savePctRank}</p>
-          </div>  
-        </div>
-
+          </div>
       </div>
+
     </>
   )
 }
