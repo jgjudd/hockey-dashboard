@@ -13,93 +13,271 @@ const TeamPage = () => {
   // teamInfo, teamStats, teamStatRankings
   
   const { isLoading, isError, data } = useQuery(['teams', teamId, 'stats'], () => getTeamDataById(teamId))
-  console.log('data:')
-  console.log(data)
+  console.log('data.roster:')
+  console.log(data?.roster)
   return (
     <>
       { isLoading && <div>Loading...</div> }
       { isError && <div>Error Loading Team Data</div> }
 
-    <div className='flex justify-end'>
-      <div className='mx-4 mb-4 '>
-          <div className='text-left ml-2'>
-            Select Team:
+      <div className='flex justify-end'>
+        <div className='mx-4 mb-4 '>
+            <div className='text-left'>
+              Select Team:
+            </div>
+            <select className='border-2 border-slate-300 pr-8 pl-2 py-1'>
+              <option value={teamId}>{data?.teamInfo.name}</option>
+              <option>2</option>
+              <option>2</option>
+              <option>2</option>
+              <option>2</option>
+            </select>
           </div>
-          <select className='border-2 border-slate-300 pr-8 pl-2 py-1'>
-            <option value={teamId}>{data?.teamInfo.name}</option>
-            <option>2</option>
-            <option>2</option>
-            <option>2</option>
-            <option>2</option>
-          </select>
-        </div>
-    </div>
+      </div>
 
-      <div className="text-center">
-        <h3>{data?.teamInfo.name}</h3>
-        <p>Est. {data?.teamInfo.firstYearOfPlay}</p>
+      <div className="text-center mb-10">
+        <h1 className='text-2xl'>{data?.teamInfo.name}</h1>
+        <p className='mb-4'>Est. {data?.teamInfo.firstYearOfPlay}</p>
 
-        <p>{data?.teamInfo.conference.name} Conference</p>
-        <p>{data?.teamInfo.division.name} Division</p>
+        <p className='text-lg'>{data?.teamInfo.conference.name} Conference</p>
+        <p className='text-md mb-4'>{data?.teamInfo.division.name} Division</p>
   
         <p>Venue: {data?.teamInfo.venue.name} ({data?.teamInfo.venue.city})</p>
 
         <a href={data?.teamInfo.officialSiteUrl} target="_blank">{data?.teamInfo.officialSiteUrl}</a>
       </div>
-      <div className="flex flex-wrap justify-center mt-10">
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p className='text-center mb-2'>
-            {data?.teamStats.wins}-{data?.teamStats.losses}-{data?.teamStats.ot}
-          </p>
-          <p> Wins: {data?.teamStats.wins} ({data?.teamStatRankings.wins})</p>
-          <p> Losses: {data?.teamStats.losses} ({data?.teamStatRankings.losses})</p>
-          <p> OT: {data?.teamStats.ot} ({data?.teamStatRankings.ot})</p>
-          <p> Pts: {data?.teamStats.pts} ({data?.teamStatRankings.pts})</p>
+      <p className='text-left text-xl mb-4 ml-4'>
+        Overall: {data?.teamStats.wins}W - {data?.teamStats.losses}L - {data?.teamStats.ot}OTL
+      </p>
+      <div className="grid gap-4 grid-cols-3 justify-stretch mx-4">
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+
+          <p className="text-right text-sm">NHL Rank</p>
+          
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Wins: </span>
+              {data?.teamStats.wins}
+            </p>
+            <p>{data?.teamStatRankings.wins}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Losses: </span>
+              {data?.teamStats.losses}
+            </p>
+            <p>{data?.teamStatRankings.losses}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>OT: </span>
+              {data?.teamStats.ot}
+            </p>
+            <p>{data?.teamStatRankings.ot}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Pts: </span>
+              {data?.teamStats.pts}
+            </p>
+            <p>{data?.teamStatRankings.pts}</p>
+          </div>
         </div>
 
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> winScoreFirst: {data?.teamStats.winScoreFirst} ({data?.teamStatRankings.winScoreFirst})</p>
-          <p> winOppScoreFirst: {data?.teamStats.winOppScoreFirst} ({data?.teamStatRankings.winOppScoreFirst})</p>
-          <p> winLeadFirstPer: {data?.teamStats.winLeadFirstPer} ({data?.teamStatRankings.winLeadFirstPer})</p>
-          <p> winLeadSecondPer: {data?.teamStats.winLeadSecondPer} ({data?.teamStatRankings.winLeadSecondPer})</p>
-          <p> winOutshootOpp: {data?.teamStats.winOutshootOpp} ({data?.teamStatRankings.winOutshootOpp})</p>
-          <p> winOutshotByOpp: {data?.teamStats.winOutshotByOpp} ({data?.teamStatRankings.winOutshotByOpp})</p>
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[35%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-4 text-slate-600"> 
+              <span className='text-l font-bold'>Wins When Scoring First: </span>
+              {data?.teamStats.winScoreFirst}
+            </p>
+            <p>{data?.teamStatRankings.winScoreFirst}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-4 text-slate-600"> 
+              <span className='text-l font-bold'>Wins When Opponent Scores First: </span>
+              {data?.teamStats.winOppScoreFirst}
+            </p>
+            <p>{data?.teamStatRankings.winOppScoreFirst}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-4 text-slate-600"> 
+              <span className='text-l font-bold'>Wins When Leading In First Period: </span>
+              {data?.teamStats.winLeadFirstPer}
+            </p>
+            <p>{data?.teamStatRankings.winLeadFirstPer}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-4 text-slate-600"> 
+              <span className='text-l font-bold'>Wins When Leading In Second Period: </span>
+              {data?.teamStats.winLeadSecondPer}
+            </p>
+            <p className='ml-8'>{data?.teamStatRankings.winLeadSecondPer}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-4 text-slate-600"> 
+              <span className='text-l font-bold'>Wins When Outshooting Opponent: </span>
+              {data?.teamStats.winOutshootOpp}
+            </p>
+            <p>{data?.teamStatRankings.winOutshootOpp}</p>
+          </div>
+
+          <div className='flex justify-between'>
+            <p className="mb-4 text-slate-600"> 
+              <span className='text-l font-bold'>Wins When Outshot By Opponent: </span>
+              {data?.teamStats.winOutshotByOpp}
+            </p>
+            <p>{data?.teamStatRankings.winOutshotByOpp}</p>
+          </div>
         </div>
 
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> goalsPerGame: {data?.teamStats.goalsPerGame} ({data?.teamStatRankings.goalsPerGame})</p>
-          <p> shotsPerGame: {data?.teamStats.shotsPerGame} ({data?.teamStatRankings.shotsPerGame})</p>
-          <p> shotsAllowed: {data?.teamStats.shotsAllowed} ({data?.teamStatRankings.shotsAllowed})</p>
-          <p> shootingPctg: {data?.teamStats.shootingPctg} ({data?.teamStatRankings.shootingPctg})</p>
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Shots Per Game: </span>
+              {data?.teamStats.shotsPerGame}
+            </p>
+            <p>{data?.teamStatRankings.shotsPerGame}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Shots Allowed Per Game: </span>
+              {data?.teamStats.shotsAllowed}
+            </p>
+            <p className='ml-14'>{data?.teamStatRankings.shotsAllowed}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Shooting Pctg: </span>
+              {data?.teamStats.shootingPctg}%
+            </p>
+            <p>{data?.teamStatRankings.shootingPctRank}</p>
+          </div>
         </div>
 
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> evGGARatio: {data?.teamStats.evGGARatio} ({data?.teamStatRankings.evGGARatio})</p>
-          <p> faceOffWinPercentage: {data?.teamStats.faceOffWinPercentage} ({data?.teamStatRankings.faceOffWinPercentage})</p>
-          <p> faceOffsLost: {data?.teamStats.faceOffsLost} ({data?.teamStatRankings.faceOffsLost})</p>
-          <p> faceOffsTaken: {data?.teamStats.faceOffsTaken} ({data?.teamStatRankings.faceOffsTaken})</p>
-          <p> faceOffsWon: {data?.teamStats.faceOffsWon} ({data?.teamStatRankings.faceOffsWon})</p>
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>evGGA Ratio: </span>
+              {data?.teamStats.evGGARatio}
+            </p>
+            <p>{data?.teamStatRankings.evGGARatio}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Faceoff Win Percentage: </span>
+              {data?.teamStats.faceOffWinPercentage}%
+            </p>
+            <p>{data?.teamStatRankings.faceOffWinPercentage}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Faceoffs Lost: </span>
+              {data?.teamStats.faceOffsLost}
+            </p>
+            <p>{data?.teamStatRankings.faceOffsLost}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Faceoffs Taken: </span>
+              {data?.teamStats.faceOffsTaken}
+            </p>
+            <p>{data?.teamStatRankings.faceOffsTaken}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Faceoffs Won: </span>
+              {data?.teamStats.faceOffsWon}
+            </p>
+            <p>{data?.teamStatRankings.faceOffsWon}</p>
+          </div>
         </div>
 
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> gamesPlayed: {data?.teamStats.gamesPlayed} ({data?.teamStatRankings.gamesPlayed})</p>
-          <p> goalsAgainstPerGame: {data?.teamStats.goalsAgainstPerGame} ({data?.teamStatRankings.goalsAgainstPerGame})</p>
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Goals Per Game: </span>
+              {data?.teamStats.goalsPerGame}
+            </p>
+            <p>{data?.teamStatRankings.goalsPerGame}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Goals Against Per Game: </span>
+              {data?.teamStats.goalsAgainstPerGame}
+            </p>
+            <p>{data?.teamStatRankings.goalsAgainstPerGame}</p>
+          </div>
         </div>
 
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> powerPlayOpportunities: {data?.teamStats.powerPlayOpportunities} ({data?.teamStatRankings.powerPlayOpportunities})</p>
-          <p> powerPlayGoals: {data?.teamStats.powerPlayGoals} ({data?.teamStatRankings.powerPlayGoals})</p>
-          <p> powerPlayGoalsAgainst: {data?.teamStats.powerPlayGoalsAgainst} ({data?.teamStatRankings.powerPlayGoalsAgainst})</p>
-          <p> powerPlayPercentage: {data?.teamStats.powerPlayPercentage} ({data?.teamStatRankings.powerPlayPercentage})</p>
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600">
+              <span className='text-l font-bold'>Power Play Percentage: </span>
+              {data?.teamStats.powerPlayPercentage}%
+            </p>
+            <p>{data?.teamStatRankings.powerPlayPercentage}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600">
+               <span className='text-l font-bold'>Power Play Goals: </span>
+               {data?.teamStats.powerPlayGoals}
+            </p>
+            <p>{data?.teamStatRankings.powerPlayGoals}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Power Play Opportunities: </span>
+              {data?.teamStats.powerPlayOpportunities}
+            </p>
+            <p>{data?.teamStatRankings.powerPlayOpportunities}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+            <span className='text-l font-bold'>Power Play Goals Against: </span>
+            {data?.teamStats.powerPlayGoalsAgainst}
+            </p>
+            <p>{data?.teamStatRankings.powerPlayGoalsAgainst}</p>
+          </div>         
         </div>
         
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> penaltyKillPercentage: {data?.teamStats.penaltyKillPercentage} ({data?.teamStatRankings.penaltyKillPercentage})</p>
+        <div className="p-4 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600">
+              <span className='text-l font-bold'>Penalty Kill Percentage: </span>
+              {data?.teamStats.penaltyKillPercentage}%
+            </p>
+            <p>{data?.teamStatRankings.penaltyKillPercentage}</p>
+          </div>
         </div>
 
-        <div className="p-2 m-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
-          <p> ptPctg: {data?.teamStats.ptPctg} ({data?.teamStatRankings.ptPctg})</p>
-          <p> savePctg: {data?.teamStats.savePctg} ({data?.teamStatRankings.savePctg})</p>
+        <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm min-w-[30%] flex flex-col justify-center">
+          <p className="text-right text-sm">NHL Rank</p>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Point Pctg: </span> 
+              {data?.teamStats.ptPctg}
+            </p>
+            <p>{data?.teamStatRankings.ptPctg}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p className="mb-2 text-slate-600"> 
+              <span className='text-l font-bold'>Save Pctg: </span>
+              {data?.teamStats.savePctg}
+            </p>
+            <p>{data?.teamStatRankings.savePctRank}</p>
+          </div>  
         </div>
 
       </div>

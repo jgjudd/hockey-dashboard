@@ -17,7 +17,7 @@ export const getAllTeams = async () => {
 export const getTeamDataById = async (teamId) => {
   const teamBioResult = await axios.get(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}`)
   const result = await axios.get(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}/stats`)
-
+  const playersByTeam = await axios.get(`https://statsapi.web.nhl.com/api/v1/teams/${teamId}/stats?expand=team.roster`)
   // console.log('------------Team-Info-----------')
   // console.log(result.data.stats[0].splits[0].team)
   const teamInfo = teamBioResult.data.teams[0];
@@ -30,5 +30,9 @@ export const getTeamDataById = async (teamId) => {
   // console.log(result.data.stats[1].splits[0].stat)
   const teamStatRankings = result.data.stats[1].splits[0].stat
 
-  return { teamInfo, teamStats, teamStatRankings }
+  // console.log('------------Team-Stat-Rankings-----------')
+  // console.log(result.data.stats[1].splits[0].stat)
+  const roster = playersByTeam.data
+
+  return { teamInfo, teamStats, teamStatRankings, roster }
 }
