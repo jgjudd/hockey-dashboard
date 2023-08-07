@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/players',
-        element: <div>Players Page</div>
+        element: <div className='ml-4 text-white'>Players Page</div>
       },
       {
         path: '/player/:playerId',

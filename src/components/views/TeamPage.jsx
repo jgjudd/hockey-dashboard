@@ -24,7 +24,7 @@ const TeamPage = () => {
       { isError && <div>Error Loading Team Data</div> }
 
       <div className='flex justify-end'>
-        <div className='mx-4 mb-4 '>
+        <div className='mx-4'>
             <div className='text-left'>
               Select Team:
             </div>
@@ -64,7 +64,7 @@ const TeamPage = () => {
               data?.forwards.map(player => {
                 return (
                   <Link to={`/player/${player?.person.id}`} key={player?.person.id}>
-                    <button className='m-2 border-2 border-slate-200'>
+                    <button className='m-2 border-2 border-grey text-white backdrop-blur rounded-lg active:bg-grey hover:border-white'>
                       <p>{player.person.fullName}</p>
                       <p>{player.jerseyNumber}</p>
                       <p>{player.person.id}</p>
@@ -88,7 +88,7 @@ const TeamPage = () => {
               data?.defensemen.map(player => {
                 return (
                   <Link key={player.person.id}>
-                    <button className='m-2 border-2 border-slate-200'>
+                    <button className='m-2 border-2 border-grey text-white backdrop-blur rounded-lg active:bg-grey hover:border-white'>
                       <p>{player.person.fullName}</p>
                       <p>{player.person.id}</p>
                       <p>{player.person.link}</p>
@@ -111,7 +111,7 @@ const TeamPage = () => {
               data?.goalies.map(player => {
                 return (
                   <Link key={player.person.id}>
-                    <button className='m-2 border-2 border-slate-200'>
+                    <button className='m-2 border-2 border-grey text-white backdrop-blur rounded-lg active:bg-grey hover:border-white'>
                       <p>{player.person.fullName}</p>
                       <p>{player.person.id}</p>
                       <p>{player.person.link}</p>
@@ -127,7 +127,7 @@ const TeamPage = () => {
           </div>
       </div>
 
-      <div className="p-2 border-2 border-slate-300 bg-slate-100 shadow-sm">
+      <div className="p-2 border-2 border-grey text-white shadow-sm">
           <p className="text-right text-sm">NHL Rank</p>
           
           <div className='flex justify-between'>

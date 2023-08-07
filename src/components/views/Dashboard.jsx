@@ -31,15 +31,15 @@ const Dashboard = () => {
         <h2>Loading...</h2>
       :
         <div className="mx-2 my-4">
-          <h2 className="text-xl my-4">Eastern Conference</h2>
-          <div className="grid gap-4 grid-cols-3 justify-stretch">
+          <h2 className="text-xl text-white my-4">Eastern Conference</h2>
+          <div className="grid gap-4 grid-cols-3 justify-center">
             {
               data?.easternConference?.map((team, i) => <TeamCard teamInfo={team} key={i} />)
             }
           </div>
 
-          <h2 className="text-xl mx-2 my-4">Western Conference</h2>
-          <div className="grid gap-4 grid-cols-3 justify-stretch">
+          <h2 className="text-xl text-white mx-2 my-4">Western Conference</h2>
+          <div className="grid gap-4 grid-cols-3">
             {
               data?.westernConference?.map((team, i) => <TeamCard teamInfo={team} key={i} />)
             }
