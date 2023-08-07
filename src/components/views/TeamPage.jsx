@@ -1,5 +1,5 @@
 // import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { getTeamDataById } from '../../hooks/teamHooks'
 import { useQuery } from 'react-query'
 
@@ -13,10 +13,10 @@ const TeamPage = () => {
   // teamInfo, teamStats, teamStatRankings
   
   const { isLoading, isError, data } = useQuery(['teams', teamId, 'stats'], () => getTeamDataById(teamId))
-  console.log('data.roster:')
-  console.log(data?.forwards)
-  console.log(data?.defensemen)
-  console.log(data?.goalies)
+  // console.log('data.roster:')
+  // console.log(data?.forwards)
+  // console.log(data?.defensemen)
+  // console.log(data?.goalies)
 
   return (
     <>
@@ -38,7 +38,7 @@ const TeamPage = () => {
           </div>
       </div>
 
-      <div className="text-center">
+      <div className="text-center text-white">
         <h1 className='text-2xl'>{data?.teamInfo.name}</h1>
         <p className='mb-4'>Est. {data?.teamInfo.firstYearOfPlay}</p>
 
@@ -50,7 +50,7 @@ const TeamPage = () => {
         <a href={data?.teamInfo.officialSiteUrl} target="_blank">{data?.teamInfo.officialSiteUrl}</a>
       </div>
 
-      <p className='text-right text-xl mr-6'>
+      <p className='text-right text-xl text-white mr-6'>
         Overall: {data?.teamStats.wins}W - {data?.teamStats.losses}L - {data?.teamStats.ot}OTL
       </p>
 
@@ -58,22 +58,23 @@ const TeamPage = () => {
 
 
       <div>
-          <h3 className='ml-6'>Forwards</h3>
+          <h3 className='ml-6 text-white'>Forwards</h3>
           <div className='flex flex-wrap justify-around'>
             {
               data?.forwards.map(player => {
                 return (
-                  <span key={player.person.id} className='m-2 border-2 border-slate-200'>
-                    <p>{player.person.fullName}</p>
-                    <p>{player.jerseyNumber}</p>
-                    <p>{player.person.id}</p>
-                    <p>{player.person.link}</p>
+                  <Link to={`/player/${player?.person.id}`} key={player?.person.id}>
+                    <button className='m-2 border-2 border-slate-200'>
+                      <p>{player.person.fullName}</p>
+                      <p>{player.jerseyNumber}</p>
+                      <p>{player.person.id}</p>
+                      <p>{player.person.link}</p>
 
-                    <p>{player.position.name}</p>
-                    <p>{player.position.abbreviation}</p>
-                    <p>{player.position.type}</p>
-
-                  </span>
+                      <p>{player.position.name}</p>
+                      <p>{player.position.abbreviation}</p>
+                      <p>{player.position.type}</p>
+                    </button>
+                  </Link>
                 )
               })
             }
@@ -81,21 +82,22 @@ const TeamPage = () => {
       </div>
 
       <div>
-          <h3 className='ml-6'>Defensemen</h3>
+          <h3 className='ml-6 text-white'>Defensemen</h3>
           <div className='flex flex-wrap justify-between'>
             {
               data?.defensemen.map(player => {
                 return (
-                  <span key={player.person.id} className='m-2 border-2 border-slate-200'>
-                    <p>{player.person.fullName}</p>
-                    <p>{player.person.id}</p>
-                    <p>{player.person.link}</p>
+                  <Link key={player.person.id}>
+                    <button className='m-2 border-2 border-slate-200'>
+                      <p>{player.person.fullName}</p>
+                      <p>{player.person.id}</p>
+                      <p>{player.person.link}</p>
 
-                    <p>{player.position.name}</p>
-                    <p>{player.position.abbreviation}</p>
-                    <p>{player.position.type}</p>
-
-                  </span>
+                      <p>{player.position.name}</p>
+                      <p>{player.position.abbreviation}</p>
+                      <p>{player.position.type}</p>
+                    </button>
+                  </Link>
                 )
               })
             }
@@ -103,21 +105,22 @@ const TeamPage = () => {
       </div>
 
       <div>
-          <h3 className='ml-6'>Goalies</h3>
-          <div className='flex flex-wrap justify-between'>   
+          <h3 className='ml-6 text-white'>Goalies</h3>
+          <div className='flex flex-wrap'>   
             {
               data?.goalies.map(player => {
                 return (
-                  <span key={player.person.id} className='m-2 border-2 border-slate-200'>
-                    <p>{player.person.fullName}</p>
-                    <p>{player.person.id}</p>
-                    <p>{player.person.link}</p>
+                  <Link key={player.person.id}>
+                    <button className='m-2 border-2 border-slate-200'>
+                      <p>{player.person.fullName}</p>
+                      <p>{player.person.id}</p>
+                      <p>{player.person.link}</p>
 
-                    <p>{player.position.name}</p>
-                    <p>{player.position.abbreviation}</p>
-                    <p>{player.position.type}</p>
-
-                  </span>
+                      <p>{player.position.name}</p>
+                      <p>{player.position.abbreviation}</p>
+                      <p>{player.position.type}</p>
+                    </button>
+                  </Link>
                 )
               })
             }

@@ -1,12 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Dashboard from './components/views/Dashboard.jsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
+
+import App from './App.jsx'
+import Dashboard from './components/views/Dashboard.jsx'
 import TeamPage from './components/views/TeamPage'
 import LeaguePage from './components/views/LeaguePage.jsx'
+import PlayerPage from './components/views/PlayerPage.jsx'
 
 const queryClient = new QueryClient()
 
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/players',
         element: <div>Players Page</div>
+      },
+      {
+        path: '/player/:playerId',
+        element: <PlayerPage />
       },
     ]
   }
