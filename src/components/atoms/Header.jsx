@@ -2,7 +2,7 @@ import './Header.css'
 
 const Header = () => {
   return (
-    <header id="site-header" className='shadow-sm border-b-2 border-white'>
+    <header id="site-header" className='shadow-sm border-b-2 border-red'>
       <ul className="menu-items">
         <li className="logo">Hockeytown.io</li>
       </ul>

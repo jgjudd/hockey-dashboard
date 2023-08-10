@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 const TeamCard = ({ teamInfo }) => {
   // console.log(teamInfo.id)
   return (
-    <Link to={`/teams/${teamInfo.id}`} className="border-2 border-grey rounded-lg shadow shadow-grey active:bg-grey hover:border-grey-500">
+    <Link to={`/teams/${teamInfo.id}`} className="active:bg-grey hover:border-grey-500">
       <button
         type='button'
-        className="w-full p-2 backdrop-blur flex justify-between items-center"
+        className='team-card'
       >
         <div className="text-left text-white opacity-100">  
           <p className="mb-2 ml-1 text-lg">{ teamInfo?.name } ({ teamInfo?.abbreviation })</p>

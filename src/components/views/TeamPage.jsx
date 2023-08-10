@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom'
 import { getTeamDataById } from '../../hooks/teamHooks'
 import { useQuery } from 'react-query'
 
+import '../atoms/PlayerCard.css'
+
 const TeamPage = () => {
   const { teamId } = useParams()
 
@@ -25,8 +27,8 @@ const TeamPage = () => {
 
       <div className='flex justify-end'>
         <div className='mx-4'>
-            <div className='text-left'>
-              Select Team:
+            <div className='text-left text-white'>
+              Change Team:
             </div>
             <select className='border-2 border-slate-300 pr-8 pl-2 py-1'>
               <option value={teamId}>{data?.teamInfo.name}</option>
@@ -64,9 +66,9 @@ const TeamPage = () => {
               data?.forwards.map(player => {
                 return (
                   <Link to={`/player/${player?.person.id}`} key={player?.person.id}>
-                    <button className='m-2 border-2 border-grey text-white backdrop-blur rounded-lg active:bg-grey hover:border-white'>
+                    <button className='player-card'>
                       <p>{player.person.fullName}</p>
-                      <p>{player.jerseyNumber}</p>
+                      <p>#{player.jerseyNumber}</p>
                       <p>{player.person.id}</p>
                       <p>{player.person.link}</p>
 
@@ -87,9 +89,10 @@ const TeamPage = () => {
             {
               data?.defensemen.map(player => {
                 return (
-                  <Link key={player.person.id}>
-                    <button className='m-2 border-2 border-grey text-white backdrop-blur rounded-lg active:bg-grey hover:border-white'>
+                  <Link to={`/player/${player?.person.id}`} key={player?.person.id}>
+                    <button className='player-card'>
                       <p>{player.person.fullName}</p>
+                      <p>#{player.jerseyNumber}</p>
                       <p>{player.person.id}</p>
                       <p>{player.person.link}</p>
 
@@ -110,9 +113,10 @@ const TeamPage = () => {
             {
               data?.goalies.map(player => {
                 return (
-                  <Link key={player.person.id}>
-                    <button className='m-2 border-2 border-grey text-white backdrop-blur rounded-lg active:bg-grey hover:border-white'>
+                  <Link to={`/player/${player?.person.id}`} key={player?.person.id}>
+                    <button className='player-card'>
                       <p>{player.person.fullName}</p>
+                      <p>#{player.jerseyNumber}</p>
                       <p>{player.person.id}</p>
                       <p>{player.person.link}</p>
 
