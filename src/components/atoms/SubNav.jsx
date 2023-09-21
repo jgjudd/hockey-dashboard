@@ -7,6 +7,7 @@ const SubNav = () => {
         <Link to={"/league"} className="mx-4">League</Link>
         <Link to={"/allTeams"} className="mx-4">Teams</Link>
         <Link to={"/players"} className="mx-4">Players</Link>
+        <Link to={"/fantasy"} className="mx-4">Fantasy</Link>
       </ul>
   </nav>
   )

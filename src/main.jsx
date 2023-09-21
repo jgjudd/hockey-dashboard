@@ -9,6 +9,8 @@ import Dashboard from './components/views/Dashboard.jsx'
 import TeamPage from './components/views/TeamPage'
 import LeaguePage from './components/views/LeaguePage.jsx'
 import PlayerPage from './components/views/PlayerPage.jsx'
+import Fantasy from './components/views/Fantasy.tsx'
+import SignIn from './components/atoms/SignIn.jsx'
 
 const queryClient = new QueryClient()
 
@@ -37,6 +39,16 @@ const router = createBrowserRouter([
       {
         path: '/player/:playerId',
         element: <PlayerPage />
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+        errorElement: <div>Sign In Errror</div>
+      },
+      {
+        path: '/fantasy',
+        element: <Fantasy />,
+        errorElement: <div>Sign In Errror</div>
       },
     ]
   }
