@@ -10,7 +10,10 @@ import TeamPage from './components/views/TeamPage'
 import LeaguePage from './components/views/LeaguePage.jsx'
 import PlayerPage from './components/views/PlayerPage.jsx'
 import Fantasy from './components/views/Fantasy.tsx'
+import FantasyStandings from './components/atoms/FantasyStandings.tsx'
 import SignIn from './components/atoms/SignIn.jsx'
+import FantasyRoster from './components/atoms/FantasyRoster.tsx'
+import FantasyFreeAgents from './components/atoms/FantasyFreeAgents.tsx'
 
 const queryClient = new QueryClient()
 
@@ -48,7 +51,21 @@ const router = createBrowserRouter([
       {
         path: '/fantasy',
         element: <Fantasy />,
-        errorElement: <div>Sign In Errror</div>
+        errorElement: <div>Sign In Errror</div>,
+        children: [
+          {
+            path: 'standings',
+            element: <FantasyStandings />
+          },
+          {
+            path: 'roster',
+            element: <FantasyRoster />
+          },
+          {
+            path: 'freeagents',
+            element: <FantasyFreeAgents />
+          },
+        ]
       },
     ]
   }
