@@ -5,7 +5,8 @@ const LeaguePage = () => {
   const { data, isError, isLoading } = useQuery('standings', getStandings)
   console.log('data', data)
   return (
-    <div className="overflow-auto flex justify-around border-b-2 border-slate-100 pb-10">
+    <>
+    <div className="overflow-auto flex justify-around border-b-2 border-slate-100 pb-10 text-white">
       { isError && <div>Error</div> }
       { isLoading && <div>Loading...</div> }
 
@@ -63,8 +64,38 @@ const LeaguePage = () => {
           }
         </ol>
       </div>
-       
+     
     </div>
+    <div className="text-white">
+        <h3>Player Stats - League Wide</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Stat A</th>
+              <th>Stat B</th>
+              <th>Stat C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 

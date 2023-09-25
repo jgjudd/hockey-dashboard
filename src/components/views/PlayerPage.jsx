@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { getPlayerById } from "../../hooks/playerHooks"
 import { useQuery } from "react-query"
+import PlayerCareerStats from "../atoms/PlayerCareerStats"
 
 const PlayerPage = () => {
   const { playerId } = useParams()
@@ -9,7 +10,7 @@ const PlayerPage = () => {
   console.log('data', data)
 
   return (
-    <>
+    <div className="flex justify-around">
       { isError && <div>Error Loading Player Data...</div> }
       { isLoading && <div>Loading...</div> }
       {
@@ -52,15 +53,13 @@ const PlayerPage = () => {
               <p>birthCountry: {data?.playerInfo.birthCountry}</p>
               <p>birthDate: {data?.playerInfo.birthDate}</p>
               <p>birthStateProvince: {data?.playerInfo.birthStateProvince}</p>
-
-            </div>
-            <div className="text-white">
               <p>assists: { data?.playerStats.assists }</p>
             </div>
+            <PlayerCareerStats playerId={playerId} />
           </>
         )
       }    
-    </>
+    </div>
 
   )
 }

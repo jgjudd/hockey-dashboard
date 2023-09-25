@@ -25,3 +25,9 @@ export const getStandings = async () => {
 
 
 }
+
+export const getCareerStats = async (playerId) => {
+  // https://statsapi.web.nhl.com/api/v1/people/8471214/stats?stats=yearByYear
+  const result = await axios.get(`https://statsapi.web.nhl.com/api/v1/people/${playerId}/stats?stats=yearByYear`)
+  return result
+}

@@ -36,10 +36,6 @@ const router = createBrowserRouter([
         element: <TeamPage />
       },
       {
-        path: '/players',
-        element: <div className='ml-4 text-white'>Players Page</div>
-      },
-      {
         path: '/player/:playerId',
         element: <PlayerPage />
       },
