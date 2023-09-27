@@ -13,19 +13,19 @@ type Team = {
   rank: number;
   team_key: string;
 }
-type EligiblePositions = 'C' | 'LW' | 'RW' | 'D' | 'G' | 'Util'
+// type EligiblePositions = 'C' | 'LW' | 'RW' | 'D' | 'G' | 'Util'
 
-type PositionType = 'P' | 'G' | 'p' | 'g'
+// type PositionType = 'P' | 'G' | 'p' | 'g'
 
-type Player = {
-  eligible_positions: EligiblePositions[];
-  name: string,
-  player_id: number,
-  position_type: PositionType,
-  selected_position: EligiblePositions | 'BN',
-  status: string
-  percent_owned: number
-}
+// type Player = {
+//   eligible_positions: EligiblePositions[];
+//   name: string,
+//   player_id: number,
+//   position_type: PositionType,
+//   selected_position: EligiblePositions | 'BN',
+//   status: string
+//   percent_owned: number
+// }
 
 export const getStandings = async () : Promise<Team[]> => {
   const { data } = await axios.get<Team[]>('http://127.0.0.1:5000/standings')
@@ -72,6 +72,7 @@ type PlayerStats = {
   "SV": number | "-",
   "SV%": number | "-",
   "W": number | "-",
+  
 }
 
 export const getMyRoster = async () : Promise<PlayerStats[]> => {
@@ -79,44 +80,54 @@ export const getMyRoster = async () : Promise<PlayerStats[]> => {
   return data
 }
 
+type Position = "C" | "LW" |"RW" | "D" | "G" | "Util"
 
-export const getFreeAgents = async () : Promise<Player[]> => {
-  const c = axios.get<Player[]>('http://127.0.0.1:5000/freeAgents/C')
-  const lw = axios.get<Player[]>('http://127.0.0.1:5000/freeAgents/LW')
-  const rw = axios.get<Player[]>('http://127.0.0.1:5000/freeAgents/RW')
-  const d = axios.get<Player[]>('http://127.0.0.1:5000/freeAgents/D')
-  const g = axios.get<Player[]>('http://127.0.0.1:5000/freeAgents/G')
+type FreeAgent = {
+  "+/-": number | "-",
+  "A": number | "-",
+  "Avg-PPT": number | "-",
+  "Avg-SHT": number | "-",
+  "COR": number | "-",
+  "Def-ZS": number | "-",
+  "FEN": number | "-",
+  "G": number | "-",
+  "GP": number | "-",
+  "GStr": number | "-",
+  "GWG": number | "-",
+  "HIT": number | "-",
+  "Off-ZS": number | "-",
+  "P": number | "-",
+  "PIM": number | "-",
+  "PPA": number | "-",
+  "PPG": number | "-",
+  "PPP": number | "-",
+  "PPT": number | "-",
+  "S%": number | "-",
+  "SHA": number | "-",
+  "SHG": number,
+  "SHT": number | "-",
+  "SOG": number | "-",
+  "Shifts": number | "-",
+  "ZS-Pct": number | "-",
+  "eligible_positions": Position[]
+  "name": string,
+  "percent_owned": number,
+  "player_id": number,
+  "position_type": "P" | "G",
+  "status": string
+  "GA": number | "-",
+  "GAA": number | "-",
+  "GS": number | "-",
+  "L": number | "-",
+  "MIN": "3,004:55",
+  "SA": number | "-",
+  "SHO": number | "-",
+  "SV": number | "-",
+  "SV%": number | "-",
+  "W": number | "-",
+}
 
-  const data = await axios.all([c, lw, rw, d, g])
-
-  const centers = data[0].data
-  const leftWingers = data[1].data
-  const rightWingers = data[2].data
-  const defensemen = data[3].data
-  const goalies = data[4].data
-
-  const results: Player[] = [ ...centers, ...leftWingers, ...rightWingers, ...defensemen, ...goalies ]
-  
-  const playerIds: number[] = []
-  
-  const freeAgents: Player[] = results.filter(player => {
-    const isDuplicate = playerIds.includes(player.player_id)
-
-    if (!isDuplicate) {
-      playerIds.push(player.player_id)
-      return true
-    }
-    return false
-  })
-
-
-
-  // return { 
-  //   centers: centers,
-  //   leftWingers: leftWingers,
-  //   rightWingers: rightWingers,
-  //   defensemen: defensemen,
-  //   goalies: goalies
-  // }
-  return freeAgents
+export const getFreeAgents = async () : Promise<FreeAgent[]> => {
+  const freeAgents = await axios.get<FreeAgent[]>('http://127.0.0.1:5000/freeAgents')
+  return freeAgents.data
 }
