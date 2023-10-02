@@ -45,6 +45,16 @@ const router = createBrowserRouter([
         errorElement: <div>Sign In Errror</div>
       },
       {
+        path: '/line-combinations',
+        element: <div>Line Combinations</div>,
+        errorElement: <div>Line Combo Errror</div>
+      },
+      {
+        path: '/starting-goalies',
+        element: <div>Starting Goalies</div>,
+        errorElement: <div>Goalie Errror</div>
+      },
+      {
         path: '/fantasy',
         element: <Fantasy />,
         errorElement: <div>Sign In Errror</div>,

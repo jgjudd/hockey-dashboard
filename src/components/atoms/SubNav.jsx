@@ -10,6 +10,10 @@ const SubNav = () => {
         <p>|</p>
         <Link to={"/players"} className="mx-4">Player Stats</Link>
         <p>|</p>
+        <Link to={"/fantasy/line-combinations"} className="mx-4">Line Combinations</Link>
+        <p>|</p>
+        <Link to={"/fantasy/starting-goalies"} className="mx-4">Starting Goalies</Link>
+        <p>|</p>
         <Link to={"/fantasy"} className="mx-4">Fantasy</Link>
       </ul>
   </nav>
