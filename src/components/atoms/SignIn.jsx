@@ -28,7 +28,7 @@ const SignIn = () => {
   const handleLogin = async () => {
     await loginWithRedirect({
       appState: {
-        returnTo: 'dashboard'
+        returnTo: 'fantasy'
       }
     })
   }
